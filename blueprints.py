@@ -1,5 +1,5 @@
 from flask import current_app, Blueprint, request
-from settings import TOKEN
+from .settings import TOKEN
 import hashlib
 admin = Blueprint('admin', __name__, url_prefix=None)
 
@@ -11,11 +11,10 @@ def index():
     echostr = request.args.get('echostr', None)
     if check_signature(signature, timestamp, nonce):
         return echostr
-    return None
+    return 'hello'
 
 def check_signature(signature, timestamp, nonce):
     token = TOKEN
-
-    if hashlib.sha1(''.join(sorted(token, timestamp, nonce))) == signature:
+    if hashlib.sha1(''.join(sorted([token, timestamp, nonce])).encode()) == signature:
         return True
     return False
