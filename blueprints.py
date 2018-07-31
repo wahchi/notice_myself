@@ -15,6 +15,6 @@ def index():
 
 def check_signature(signature, timestamp, nonce):
     token = TOKEN
-    if hashlib.sha1(''.join(sorted([token, timestamp, nonce])).encode()) == signature:
+    if hashlib.sha1(''.join(sorted([token, timestamp, nonce])).encode()).hexdigest() == signature:
         return True
     return False
