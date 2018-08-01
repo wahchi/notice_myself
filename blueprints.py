@@ -19,7 +19,22 @@ def index():
         return 'hello'
     if request.method == 'POST':
         data = request.data.decode()
-        print(xmltodict.parse(data))
+        to_user_name = xmltodict.parse(data)['xml']['ToUserName']
+        from_user_name = xmltodict.parse(data)['xml']['FromUserName']
+        create_time = xmltodict.parse(data)['xml']['CreateTime']
+        msg_type = xmltodict.parse(data)['xml']['MsgType']
+        content = xmltodict.parse(data)['xml']['Content']
+        msg_id = xmltodict.parse(data)['xml']['MsgId']
+        req = {
+            'xml':{
+            'ToUserName': from_user_name,
+            'FromUserName': 'WahChiYu',
+            'CreateTime': create_time,
+            'MsgType': msg_type,
+            'Content': 'bye'
+            }
+        }
+        return xmltodict.unparse(req)
     return 'helo'
         # print(data)
 
