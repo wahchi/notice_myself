@@ -18,6 +18,7 @@ def index():
                 return echostr
         return 'hello'
     if request.method == 'POST':
+
         data = request.data.decode()
         to_user_name = xmltodict.parse(data)['xml']['ToUserName']
         from_user_name = xmltodict.parse(data)['xml']['FromUserName']
@@ -25,6 +26,7 @@ def index():
         msg_type = xmltodict.parse(data)['xml']['MsgType']
         content = xmltodict.parse(data)['xml']['Content']
         msg_id = xmltodict.parse(data)['xml']['MsgId']
+        print(data)
         req = {
             'xml':{
             'ToUserName': from_user_name,
@@ -34,7 +36,9 @@ def index():
             'Content': 'bye'
             }
         }
-        return xmltodict.unparse(req)
+        req_data = xmltodict.unparse(req)
+        print(req_data)
+        return req_data
     return 'helo'
         # print(data)
 
