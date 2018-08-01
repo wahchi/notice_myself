@@ -30,13 +30,13 @@ def index():
         req = {
             'xml':{
             'ToUserName': from_user_name,
-            'FromUserName': 'WahChiYu',
+            'FromUserName': to_user_name,
             'CreateTime': create_time,
             'MsgType': msg_type,
             'Content': 'bye'
             }
         }
-        req_data = xmltodict.unparse(req)
+        req_data = xmltodict.unparse(req, full_document=False, short_empty_elements=True)
         print(req_data)
         return req_data
     return 'helo'
